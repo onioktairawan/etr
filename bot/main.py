@@ -1,12 +1,22 @@
+# bot/main.py
+import asyncio
 from pyrogram import Client
-from menu import *
+from dotenv import load_dotenv
+import os
 
-app = Client(
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+API_ID = int(os.getenv("API_ID"))
+API_HASH = os.getenv("API_HASH")
+
+bot = Client(
     "bot",
-    api_id=123456,
-    api_hash="your_api_hash",
-    bot_token="your_bot_token"
+    bot_token=BOT_TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH,
+    plugins={"root": "bot"}  # agar handler di folder bot otomatis dikenali
 )
 
 if __name__ == "__main__":
-    app.run()
+    bot.run()
